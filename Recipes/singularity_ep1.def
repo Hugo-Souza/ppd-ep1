@@ -1,0 +1,18 @@
+Bootstrap: docker
+From: ufscar/ubuntu_ompi:latest
+
+%help
+EP1 de PPD. Uso do cluster openHPC da UFSCar para experimento de escalabilidade do cálculo de PI
+
+%files
+	#Copiando os arquivos necessários
+	./../Source/* /opt
+
+%post
+	# Compilando os programas do exercício
+	echo ¨Compilando programas...¨
+	cd /opt && make
+	cp pi_seq pi_pth pi_omp /usr/bin
+	
+%runscript
+	exec $@
